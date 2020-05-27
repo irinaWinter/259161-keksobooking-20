@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Ирина Коржева](https://up.htmlacademy.ru/javascript/20/user/259161).
-* Наставник: `Неизвестно`.
+* Наставник: [Михал Кислый](https://htmlacademy.ru/profile/smart-grizzly).
 
 ---
 
