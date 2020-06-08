@@ -1,7 +1,6 @@
 'use strict';
 
 var ADS_NUMBER = 8;
-var AVATAR_NAMES = [7, 1, 2, 3, 4, 5, 6, 8];
 var OBJECTS_TYPES = ['palace', 'flat', 'house', 'bungalo'];
 var CHECKIN_TIME = [12, 13, 14];
 var CHECKOUT_TIME = [12, 13, 14];
@@ -40,7 +39,7 @@ var map = document.querySelector('.map');
 var generateAd = function () {
   return {
     'autor': {
-      'avatar': 'img/avatars/user0' + AVATAR_NAMES[avatarIndex] + '.png'
+      'avatar': 'img/avatars/user0' + avatarIndex + '.png'
     },
     'offer': {
       'title': 'Заголовок предложения',
@@ -87,7 +86,7 @@ var mapPin = pinsList.querySelector('.map__pin');
 
 var renderPin = function (ad) {
   var pinElement = pinTemplate.cloneNode(true);
-  var pinImg = pinTemplate.querySelector('img');
+  var pinImg = pinElement.querySelector('img');
 
   pinElement.style = 'left: ' + (ad.offer.location.x - mapPin.offsetWidth / 2) + 'px; top: ' + (ad.offer.location.y + mapPin.offsetHeight) + 'px;';
   pinImg.src = ad.autor.avatar;
