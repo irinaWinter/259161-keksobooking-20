@@ -17,6 +17,20 @@ var PHOTO_WIDTH = 45;
 var PHOTO_HEIGHT = 40;
 var PHOTO_ALT = 'Фотография жилья';
 
+var makeDisabled = function (item) {
+  item.disabled = true;
+};
+
+var adForm = document.querySelector('.ad-form');
+
+var adFormFieldsets = adForm.querySelectorAll('fieldset');
+adFormFieldsets.forEach(makeDisabled);
+
+var map = document.querySelector('.map');
+
+var mapFilters = map.querySelectorAll('.map__filters select, .map__filters fieldset');
+mapFilters.forEach(makeDisabled);
+
 var avatarIndex = 1;
 
 var generateRandomNumber = function (min, max) {
@@ -45,8 +59,6 @@ var generateRandomArray = function (data) {
 var getRandomProperty = function (obj) {
   return Object.keys(obj)[generateRandomNumber(0, Object.keys(obj).length - 1)];
 };
-
-var map = document.querySelector('.map');
 
 var generateAd = function () {
   return {
@@ -87,8 +99,6 @@ var generateArray = function (arr, data, length) {
 
 generateArray(ads, generateAd, ADS_NUMBER);
 
-map.classList.remove('map--faded');
-
 // Отрисовка меток
 var pinTemplate = document.querySelector('#pin')
   .content
@@ -108,7 +118,7 @@ var renderPin = function (ad) {
   return pinElement;
 };
 
-var addPins = function (adsArray) {
+var collectPins = function (adsArray) {
   var fragment = document.createDocumentFragment();
 
   adsArray.forEach(function (item) {
@@ -118,7 +128,39 @@ var addPins = function (adsArray) {
   return fragment;
 };
 
-pinsList.appendChild(addPins(ads));
+var addPins = function () {
+  pinsList.appendChild(collectPins(ads));
+};
+
+// Активация страницы
+var makeEnabled = function (item) {
+  item.disabled = false;
+}
+
+var activateElement = function (item, elements, removableClass) {
+  elements.forEach(makeEnabled);
+  item.classList.remove(removableClass);
+};
+
+var activatePage = function () {
+  activateElement(map, mapFilters, 'map--faded');
+  activateElement(adForm, adFormFieldsets, 'ad-form--disabled');
+  addPins();
+}
+
+var mainPin = map.querySelector('.map__pin--main');
+
+mainPin.addEventListener('mousedown', function (evt) {
+  if (evt.button === 0) {
+    activatePage();
+  }
+});
+
+mainPin.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    activatePage();
+  }
+});
 
 // Отрисовка описания объявления
 var adCardTemplate = document.querySelector('#card')
@@ -208,7 +250,7 @@ var renderAdCard = function (ad) {
   return adCardElement;
 };
 
-var firstAd = renderAdCard(ads[0]);
+// var firstAd = renderAdCard(ads[0]);
 
-var mapFilters = map.querySelector('.map__filters-container');
-map.insertBefore(firstAd, mapFilters);
+// var mapFilters = map.querySelector('.map__filters-container');
+// map.insertBefore(firstAd, mapFilters);
