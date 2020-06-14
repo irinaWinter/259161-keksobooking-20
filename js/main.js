@@ -142,6 +142,13 @@ var activateElement = function (item, elements, removableClass) {
   item.classList.remove(removableClass);
 };
 
+var mainPin = map.querySelector('.map__pin--main');
+var addressField = adForm.querySelector('input[name=address]');
+
+var setAddressFieldValue = function () {
+  addressField.value = (parseInt(mainPin.style.left, 10) - mapPin.offsetWidth / 2) + ', ' + (parseInt(mainPin.style.top, 10) + mapPin.offsetWidth); // Доработать
+};
+
 var activatePage = function () {
   activateElement(map, mapFilters, 'map--faded');
   activateElement(adForm, adFormFieldsets, 'ad-form--disabled');
@@ -152,6 +159,7 @@ var activatePage = function () {
 var onMainPinClick = function (evt) {
   if (evt.button === 0) {
     activatePage();
+    setAddressFieldValue();
 
     mainPin.removeEventListener('mousedown', onMainPinClick);
     mainPin.removeEventListener('keydown', onMainPinKeydown);
@@ -161,15 +169,19 @@ var onMainPinClick = function (evt) {
 var onMainPinKeydown = function (evt) {
   if (evt.key === 'Enter') {
     activatePage();
+    setAddressFieldValue();
 
     mainPin.removeEventListener('keydown', onMainPinKeydown);
     mainPin.removeEventListener('mousedown', onMainPinClick);
   }
 };
 
-var mainPin = map.querySelector('.map__pin--main');
+setAddressFieldValue();
+
 mainPin.addEventListener('mousedown', onMainPinClick);
 mainPin.addEventListener('keydown', onMainPinKeydown);
+
+// Заполнение поля адреса
 
 // Отрисовка описания объявления
 // var adCardTemplate = document.querySelector('#card')
