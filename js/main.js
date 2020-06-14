@@ -1,6 +1,25 @@
 'use strict';
 
 var ADS_NUMBER = 8;
+var GET_OFFER_DETAILS = function () {
+  return {
+    'title': 'Заголовок предложения',
+    'address': '600, 350',
+    'price': 5000,
+    'type': OBJECTS_TYPES[getRandomProperty(OBJECTS_TYPES)],
+    'rooms': 3,
+    'guests': 3,
+    'checkin': generateRandomData(CHECKIN_TIME) + ':00',
+    'checkout': generateRandomData(CHECKOUT_TIME) + ':00',
+    'features': generateRandomArray(FEATURES),
+    'description': 'Описание',
+    'photos': generateRandomArray(PHOTOS),
+    'location': {
+      'x': generateRandomNumber(0, map.offsetWidth),
+      'y': generateRandomNumber(COORD_Y_TOP, COORD_Y_BOTTOM)
+    }
+  }
+}
 var OBJECTS_TYPES = {
   'palace': 'Дворец',
   'flat': 'Квартира',
@@ -14,7 +33,7 @@ var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.g
 var COORD_Y_TOP = 130;
 var COORD_Y_BOTTOM = 630;
 var PIN_WIDTH = 50;
-var PIN_HEIGHT = 30;
+var PIN_HEIGHT = 64;
 var MAIN_PIN_WIDTH = 62;
 var MAIN_PIN_HEIGHT = 84;
 // (ДЛЯ 2-Й ЧАСТИ ЗАДАНИЯ)
@@ -72,23 +91,7 @@ var generateAd = function () {
     'autor': {
       'avatar': 'img/avatars/user0' + avatarIndex + '.png'
     },
-    'offer': {
-      'title': 'Заголовок предложения',
-      'address': '600, 350',
-      'price': 5000,
-      'type': OBJECTS_TYPES[getRandomProperty(OBJECTS_TYPES)],
-      'rooms': 3,
-      'guests': 3,
-      'checkin': generateRandomData(CHECKIN_TIME) + ':00',
-      'checkout': generateRandomData(CHECKOUT_TIME) + ':00',
-      'features': generateRandomArray(FEATURES),
-      'description': 'Описание',
-      'photos': generateRandomArray(PHOTOS),
-      'location': {
-        'x': generateRandomNumber(0, map.offsetWidth),
-        'y': generateRandomNumber(COORD_Y_TOP, COORD_Y_BOTTOM)
-      }
-    }
+    'offer': GET_OFFER_DETAILS()
   };
 };
 

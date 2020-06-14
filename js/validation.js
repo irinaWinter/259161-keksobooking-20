@@ -13,7 +13,7 @@ var adForm = document.querySelector('.ad-form');
 var type = adForm.querySelector('select[name=type]');
 
 var gettypeValue = function () {
-  return type.options[type.selectedIndex].value;
+  return type.value;
 };
 
 var price = adForm.querySelector('input[name=price]');
