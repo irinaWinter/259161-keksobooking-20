@@ -1,6 +1,19 @@
 'use strict';
 
 var ADS_NUMBER = 8;
+var OBJECTS_TYPES = {
+  'palace': 'Дворец',
+  'flat': 'Квартира',
+  'house': 'Дом',
+  'bungalo': 'Бунгало'
+};
+var CHECKIN_TIME = [12, 13, 14];
+var CHECKOUT_TIME = [12, 13, 14];
+var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+var COORD_Y_TOP = 130;
+var COORD_Y_BOTTOM = 630;
+
 var GET_OFFER_DETAILS = function () {
   return {
     'title': 'Заголовок предложения',
@@ -20,18 +33,7 @@ var GET_OFFER_DETAILS = function () {
     }
   }
 }
-var OBJECTS_TYPES = {
-  'palace': 'Дворец',
-  'flat': 'Квартира',
-  'house': 'Дом',
-  'bungalo': 'Бунгало'
-};
-var CHECKIN_TIME = [12, 13, 14];
-var CHECKOUT_TIME = [12, 13, 14];
-var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-var COORD_Y_TOP = 130;
-var COORD_Y_BOTTOM = 630;
+
 var PIN_WIDTH = 50;
 var PIN_HEIGHT = 64;
 var MAIN_PIN_WIDTH = 62;
@@ -174,7 +176,7 @@ var activatePage = function () {
   setAddressFieldValue(getTipСoordinates(mainPin, MAIN_PIN_WIDTH, MAIN_PIN_HEIGHT));
 };
 
-var mainPinRemooveHandlers = function () {
+var mainPinRemoveHandlers = function () {
   mainPin.removeEventListener('keydown', mainPinKeydownHandler);
   mainPin.removeEventListener('mousedown', mainPinClickHandler);
 };
@@ -182,14 +184,14 @@ var mainPinRemooveHandlers = function () {
 var mainPinClickHandler = function (evt) {
   if (evt.button === 0) {
     activatePage();
-    mainPinRemooveHandlers();
+    mainPinRemoveHandlers();
   }
 };
 
 var mainPinKeydownHandler = function (evt) {
   if (evt.key === 'Enter') {
     activatePage();
-    mainPinRemooveHandlers();
+    mainPinRemoveHandlers();
   }
 };
 
