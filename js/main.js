@@ -13,27 +13,6 @@ var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditio
 var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 var COORD_Y_TOP = 130;
 var COORD_Y_BOTTOM = 630;
-
-var GET_OFFER_DETAILS = function () {
-  return {
-    'title': 'Заголовок предложения',
-    'address': '600, 350',
-    'price': 5000,
-    'type': OBJECTS_TYPES[getRandomProperty(OBJECTS_TYPES)],
-    'rooms': 3,
-    'guests': 3,
-    'checkin': generateRandomData(CHECKIN_TIME) + ':00',
-    'checkout': generateRandomData(CHECKOUT_TIME) + ':00',
-    'features': generateRandomArray(FEATURES),
-    'description': 'Описание',
-    'photos': generateRandomArray(PHOTOS),
-    'location': {
-      'x': generateRandomNumber(0, map.offsetWidth),
-      'y': generateRandomNumber(COORD_Y_TOP, COORD_Y_BOTTOM)
-    }
-  }
-}
-
 var PIN_WIDTH = 50;
 var PIN_HEIGHT = 64;
 var MAIN_PIN_WIDTH = 62;
@@ -88,12 +67,32 @@ var getRandomProperty = function (obj) {
   return Object.keys(obj)[generateRandomNumber(0, Object.keys(obj).length - 1)];
 };
 
+var getOfferDetails = function () {
+  return {
+    'title': 'Заголовок предложения',
+    'address': '600, 350',
+    'price': 5000,
+    'type': OBJECTS_TYPES[getRandomProperty(OBJECTS_TYPES)],
+    'rooms': 3,
+    'guests': 3,
+    'checkin': generateRandomData(CHECKIN_TIME) + ':00',
+    'checkout': generateRandomData(CHECKOUT_TIME) + ':00',
+    'features': generateRandomArray(FEATURES),
+    'description': 'Описание',
+    'photos': generateRandomArray(PHOTOS),
+    'location': {
+      'x': generateRandomNumber(0, map.offsetWidth),
+      'y': generateRandomNumber(COORD_Y_TOP, COORD_Y_BOTTOM)
+    }
+  };
+};
+
 var generateAd = function () {
   return {
     'autor': {
       'avatar': 'img/avatars/user0' + avatarIndex + '.png'
     },
-    'offer': GET_OFFER_DETAILS()
+    'offer': getOfferDetails()
   };
 };
 
