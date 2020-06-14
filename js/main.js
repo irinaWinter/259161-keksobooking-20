@@ -13,10 +13,16 @@ var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditio
 var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 var COORD_Y_TOP = 130;
 var COORD_Y_BOTTOM = 630;
+var PIN_WIDTH = 50;
+var PIN_HEIGHT = 30;
+var MAIN_PIN_WIDTH = 62;
+var MAIN_PIN_HEIGHT = 84;
+// (ДЛЯ 2-Й ЧАСТИ ЗАДАНИЯ)
 // var PHOTO_WIDTH = 45;
 // var PHOTO_HEIGHT = 40;
 // var PHOTO_ALT = 'Фотография жилья';
 
+// Блокировка страницы
 var makeDisabled = function (item) {
   item.disabled = true;
 };
@@ -31,6 +37,7 @@ var map = document.querySelector('.map');
 var mapFilters = map.querySelectorAll('.map__filters select, .map__filters fieldset');
 mapFilters.forEach(makeDisabled);
 
+// Генерация данных
 var avatarIndex = 1;
 
 var generateRandomNumber = function (min, max) {
@@ -105,13 +112,12 @@ var pinTemplate = document.querySelector('#pin')
   .querySelector('.map__pin');
 
 var pinsList = document.querySelector('.map__pins');
-var mapPin = pinsList.querySelector('.map__pin');
 
 var renderPin = function (ad) {
   var pinElement = pinTemplate.cloneNode(true);
   var pinImg = pinElement.querySelector('img');
 
-  pinElement.style = 'left: ' + (ad.offer.location.x - mapPin.offsetWidth / 2) + 'px; top: ' + (ad.offer.location.y + mapPin.offsetHeight) + 'px;';
+  pinElement.style = 'left: ' + (ad.offer.location.x - PIN_WIDTH / 2) + 'px; top: ' + (ad.offer.location.y - PIN_HEIGHT) + 'px;';
   pinImg.src = ad.autor.avatar;
   pinImg.alt = ad.offer.title;
 
@@ -132,6 +138,22 @@ var addPins = function () {
   pinsList.appendChild(collectPins(ads));
 };
 
+// Заполнение поля адреса
+var mainPin = map.querySelector('.map__pin--main');
+var addressField = adForm.querySelector('input[name=address]');
+
+var getTipСoordinates = function (pin, width, height) {
+  return (parseInt(pin.style.left, 10) + width / 2) + ', ' + (parseInt(pin.style.top, 10) + height);
+};
+
+var getCenterCoordinates = function (pin, size) {
+  return (parseInt(pin.style.left, 10) + size / 2) + ', ' + (parseInt(pin.style.top, 10) + size / 2);
+};
+
+var setAddressFieldValue = function (coordinates) {
+  addressField.value = coordinates;
+};
+
 // Активация страницы
 var makeEnabled = function (item) {
   item.disabled = false;
@@ -142,48 +164,38 @@ var activateElement = function (item, elements, removableClass) {
   item.classList.remove(removableClass);
 };
 
-var mainPin = map.querySelector('.map__pin--main');
-var addressField = adForm.querySelector('input[name=address]');
-
-var setAddressFieldValue = function () {
-  addressField.value = (parseInt(mainPin.style.left, 10) - mapPin.offsetWidth / 2) + ', ' + (parseInt(mainPin.style.top, 10) + mapPin.offsetWidth); // Доработать
-};
-
 var activatePage = function () {
   activateElement(map, mapFilters, 'map--faded');
   activateElement(adForm, adFormFieldsets, 'ad-form--disabled');
   addPins();
+  setAddressFieldValue(getTipСoordinates(mainPin, MAIN_PIN_WIDTH, MAIN_PIN_HEIGHT));
 };
 
+var mainPinRemooveHandlers = function () {
+  mainPin.removeEventListener('keydown', mainPinKeydownHandler);
+  mainPin.removeEventListener('mousedown', mainPinClickHandler);
+};
 
-var onMainPinClick = function (evt) {
+var mainPinClickHandler = function (evt) {
   if (evt.button === 0) {
     activatePage();
-    setAddressFieldValue();
-
-    mainPin.removeEventListener('mousedown', onMainPinClick);
-    mainPin.removeEventListener('keydown', onMainPinKeydown);
+    mainPinRemooveHandlers();
   }
 };
 
-var onMainPinKeydown = function (evt) {
+var mainPinKeydownHandler = function (evt) {
   if (evt.key === 'Enter') {
     activatePage();
-    setAddressFieldValue();
-
-    mainPin.removeEventListener('keydown', onMainPinKeydown);
-    mainPin.removeEventListener('mousedown', onMainPinClick);
+    mainPinRemooveHandlers();
   }
 };
 
-setAddressFieldValue();
+setAddressFieldValue(getCenterCoordinates(mainPin, MAIN_PIN_WIDTH));
 
-mainPin.addEventListener('mousedown', onMainPinClick);
-mainPin.addEventListener('keydown', onMainPinKeydown);
+mainPin.addEventListener('mousedown', mainPinClickHandler);
+mainPin.addEventListener('keydown', mainPinKeydownHandler);
 
-// Заполнение поля адреса
-
-// Отрисовка описания объявления
+// Отрисовка описания объявления (ДЛЯ 2-Й ЧАСТИ ЗАДАНИЯ)
 // var adCardTemplate = document.querySelector('#card')
 //   .content
 //   .querySelector('.map__card');
