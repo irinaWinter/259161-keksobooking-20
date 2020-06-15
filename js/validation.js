@@ -80,24 +80,18 @@ var limitChoiceOfCapacityOptions = function (item) {
     (+rooms.value === NOT_FOR_GUESTS_ROOMS &&
     +item.value !== NOT_FOR_GUESTS)) {
     item.disabled = true;
+    item.selected = false;
+  } else if (+rooms.value === NOT_FOR_GUESTS_ROOMS &&
+    +item.value === NOT_FOR_GUESTS) {
+    item.selected = true;
   } else {
     item.disabled = false;
-  }
-};
-
-var verifyValidityOfCapacityValue = function () {
-  if (typeof capacity[capacity['selectedIndex']].getAttribute('disabled') !== 'object') {
-    capacity.setCustomValidity('Выберите значение из доступных');
-  } else {
-    capacity.setCustomValidity('');
   }
 };
 
 var verifyValidityOfCapacityField = function () {
   var capacityOptions = capacity.querySelectorAll('option');
   capacityOptions.forEach(limitChoiceOfCapacityOptions);
-
-  verifyValidityOfCapacityValue();
 };
 
 var capacityChangeHandler = function () {
