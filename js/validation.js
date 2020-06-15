@@ -96,6 +96,7 @@ var verifyValidityOfCapacityValue = function () {
 var verifyValidityOfCapacityField = function () {
   var capacityOptions = capacity.querySelectorAll('option');
   capacityOptions.forEach(limitChoiceOfCapacityOptions);
+
   verifyValidityOfCapacityValue();
 };
 
