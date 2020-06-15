@@ -146,7 +146,7 @@ var addPins = function () {
 var mainPin = map.querySelector('.map__pin--main');
 var addressField = adForm.querySelector('input[name=address]');
 
-var getTipСoordinates = function (pin, width, height) {
+var getTipCoordinates = function (pin, width, height) {
   return (parseInt(pin.style.left, 10) + width / 2) + ', ' + (parseInt(pin.style.top, 10) + height);
 };
 
@@ -172,7 +172,7 @@ var activatePage = function () {
   activateElement(map, mapFilters, 'map--faded');
   activateElement(adForm, adFormFieldsets, 'ad-form--disabled');
   addPins();
-  setAddressFieldValue(getTipСoordinates(mainPin, MAIN_PIN_WIDTH, MAIN_PIN_HEIGHT));
+  setAddressFieldValue(getTipCoordinates(mainPin, MAIN_PIN_WIDTH, MAIN_PIN_HEIGHT));
 };
 
 var mainPinRemoveHandlers = function () {
