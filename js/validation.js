@@ -18,25 +18,27 @@ var gettypeValue = function () {
 
 var price = adForm.querySelector('input[name=price]');
 
+var setPrice = function (newPrice) {
+  price.min = newPrice;
+  price.placeholder = newPrice;
+  price.value = newPrice;
+};
+
 var changeMinPrice = function () {
   var typeValue = gettypeValue();
 
   switch (typeValue) {
     case 'bungalo':
-      price.min = BUNGALO_MIN_PRICE;
-      price.placeholder = BUNGALO_MIN_PRICE;
+      setPrice(BUNGALO_MIN_PRICE);
       break;
     case 'flat':
-      price.min = FLAT_MIN_PRICE;
-      price.placeholder = FLAT_MIN_PRICE;
+      setPrice(FLAT_MIN_PRICE);
       break;
     case 'house':
-      price.min = HOUSE_MIN_PRICE;
-      price.placeholder = HOUSE_MIN_PRICE;
+      setPrice(HOUSE_MIN_PRICE);
       break;
     case 'palace':
-      price.min = PALACE_MIN_PRICE;
-      price.placeholder = PALACE_MIN_PRICE;
+      setPrice(PALACE_MIN_PRICE);
       break;
   }
 };
