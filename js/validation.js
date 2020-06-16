@@ -73,16 +73,16 @@ var rooms = adForm.querySelector('select[name=rooms]');
 var capacity = adForm.querySelector('select[name=capacity]');
 
 var limitChoiceOfCapacityOptions = function (item) {
-  if ((+item.value > +rooms.value ||
-    !+item.value &&
-    +rooms.value !== NOT_FOR_GUESTS_ROOMS)
+  if ((+item.value > +rooms.value
+    || !+item.value
+    && +rooms.value !== NOT_FOR_GUESTS_ROOMS)
     ||
-    (+rooms.value === NOT_FOR_GUESTS_ROOMS &&
-    +item.value !== NOT_FOR_GUESTS)) {
+    (+rooms.value === NOT_FOR_GUESTS_ROOMS
+    && +item.value !== NOT_FOR_GUESTS)) {
     item.disabled = true;
     item.selected = false;
-  } else if (+rooms.value === NOT_FOR_GUESTS_ROOMS &&
-    +item.value === NOT_FOR_GUESTS) {
+  } else if (+rooms.value === NOT_FOR_GUESTS_ROOMS
+    && +item.value === NOT_FOR_GUESTS) {
     item.selected = true;
   } else {
     item.disabled = false;
