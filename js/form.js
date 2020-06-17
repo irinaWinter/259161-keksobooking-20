@@ -111,6 +111,7 @@
       item.selected = false;
     } else if (+rooms.value === NOT_FOR_GUESTS_ROOMS
       && +item.value === NOT_FOR_GUESTS) {
+      item.disabled = false;
       item.selected = true;
     } else {
       item.disabled = false;
@@ -122,16 +123,11 @@
     capacityOptions.forEach(limitChoiceOfCapacityOptions);
   };
 
-  var capacityChangeHandler = function () {
-    verifyValidityOfCapacityField();
-  };
-
   var roomsChangeHandler = function () {
     verifyValidityOfCapacityField();
   };
 
   verifyValidityOfCapacityField();
 
-  capacity.addEventListener('change', capacityChangeHandler);
   rooms.addEventListener('change', roomsChangeHandler);
 })();
