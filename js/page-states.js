@@ -29,11 +29,9 @@
     window.form.setAddressFieldValue();
   };
 
-  var mainPin = window.util.map.querySelector('.map__pin--main');
-
   var mainPinRemoveHandlers = function () {
-    mainPin.removeEventListener('keydown', mainPinKeydownHandler);
-    mainPin.removeEventListener('mousedown', mainPinClickHandler);
+    window.util.mainPin.removeEventListener('keydown', mainPinKeydownHandler);
+    window.util.mainPin.removeEventListener('mousedown', mainPinClickHandler);
   };
 
   var mainPinClickHandler = function (evt) {
@@ -50,6 +48,6 @@
     }
   };
 
-  mainPin.addEventListener('mousedown', mainPinClickHandler);
-  mainPin.addEventListener('keydown', mainPinKeydownHandler);
+  window.util.mainPin.addEventListener('mousedown', mainPinClickHandler);
+  window.util.mainPin.addEventListener('keydown', mainPinKeydownHandler);
 })();
