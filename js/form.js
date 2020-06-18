@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  var MAIN_PIN_WIDTH = 62;
-  var MAIN_PIN_HEIGHT = 84;
   var BUNGALO_MIN_PRICE = 0;
   var FLAT_MIN_PRICE = 1000;
   var HOUSE_MIN_PRICE = 5000;
@@ -13,7 +11,7 @@
   // Изменение поля "Адрес" после активации страницы
   window.form = {
     setAddressFieldValue: function () {
-      setAddressFieldValue(getTipCoordinates(mainPin, MAIN_PIN_WIDTH, MAIN_PIN_HEIGHT));
+      setAddressFieldValue(getTipCoordinates(window.util.mainPin, window.util.MAIN_PIN_WIDTH, window.util.MAIN_PIN_HEIGHT));
     }
   };
 
@@ -32,8 +30,7 @@
     addressField.value = coordinates;
   };
 
-  var mainPin = window.util.map.querySelector('.map__pin--main');
-  setAddressFieldValue(getCenterCoordinates(mainPin, MAIN_PIN_WIDTH));
+  setAddressFieldValue(getCenterCoordinates(window.util.mainPin, window.util.MAIN_PIN_WIDTH));
 
   // Валидация поля "Цена за ночь"
   var type = window.util.adForm.querySelector('select[name=type]');

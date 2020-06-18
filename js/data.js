@@ -20,8 +20,6 @@
   var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
   var DEFAULT_DESCRIPTION = 'Описание';
   var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-  var COORD_Y_TOP = 130;
-  var COORD_Y_BOTTOM = 630;
 
   var getRandomTime = function (time) {
     return window.random.generateRandomData(time) + ':00';
@@ -41,8 +39,8 @@
       'description': DEFAULT_DESCRIPTION,
       'photos': window.random.generateRandomArray(PHOTOS),
       'location': {
-        'x': window.random.generateRandomNumber(0, window.util.map.offsetWidth),
-        'y': window.random.generateRandomNumber(COORD_Y_TOP, COORD_Y_BOTTOM)
+        'x': window.random.generateRandomNumber(window.util.COORD_X_LEFT, window.util.COORD_X_RIGHT),
+        'y': window.random.generateRandomNumber(window.util.COORD_Y_TOP, window.util.COORD_Y_BOTTOM)
       }
     };
   };
