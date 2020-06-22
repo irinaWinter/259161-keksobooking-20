@@ -25,8 +25,9 @@
   var activatePage = function () {
     activateElement(window.util.map, mapFilters, 'map--faded');
     activateElement(window.util.adForm, adFormFieldsets, 'ad-form--disabled');
-    window.map.addPins();
+    window.backend.load(window.map.addPins);
     window.form.setAddressFieldValue();
+    mainPinRemoveHandlers();
   };
 
   var mainPinRemoveHandlers = function () {
@@ -37,14 +38,12 @@
   var mainPinClickHandler = function (evt) {
     if (evt.button === 0) {
       activatePage();
-      mainPinRemoveHandlers();
     }
   };
 
   var mainPinKeydownHandler = function (evt) {
     if (evt.key === 'Enter') {
       activatePage();
-      mainPinRemoveHandlers();
     }
   };
 

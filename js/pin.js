@@ -13,9 +13,10 @@
       var pinElement = pinTemplate.cloneNode(true);
       var pinImg = pinElement.querySelector('img');
 
-      pinElement.style = 'left: ' + (ad.offer.location.x - PIN_WIDTH / 2) + 'px; top: ' + (ad.offer.location.y - PIN_HEIGHT) + 'px;';
+      pinElement.style = 'left: ' + (ad.location.x - PIN_WIDTH / 2) + 'px; top: ' + (ad.location.y - PIN_HEIGHT) + 'px;';
+      index = index === undefined ? 0 : index;
       pinElement.id = 'pin-' + index;
-      pinImg.src = ad.autor.avatar;
+      pinImg.src = ad.author.avatar;
       pinImg.alt = ad.offer.title;
 
       return pinElement;
