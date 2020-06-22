@@ -4,6 +4,12 @@
   var PHOTO_WIDTH = 45;
   var PHOTO_HEIGHT = 40;
   var PHOTO_ALT = 'Фотография жилья';
+  var OBJECTS_TYPES = {
+    'palace': 'Дворец',
+    'flat': 'Квартира',
+    'house': 'Дом',
+    'bungalo': 'Бунгало'
+  };
 
   var adCardTemplate = document.querySelector('#card')
     .content
@@ -33,10 +39,32 @@
     }
   };
 
+  var closeButtonKeydownHandler = function (evt) {
+    if (evt.key === 'Escape') {
+      window.card.removeAdCard();
+    }
+  };
+
+  var closeButtonClickHandler = function (evt) {
+    if (evt.button === 0) {
+      window.card.removeAdCard();
+    }
+  };
+
   window.card = {
+    removeAdCard: function () {
+      var adCard = window.util.map.querySelector('.map__card');
+
+      if (adCard) {
+        adCard.remove();
+        window.removeEventListener('keydown', closeButtonKeydownHandler);
+      }
+    },
     renderAdCard: function (ad) {
+      var id = window.map.id;
+
       var adCardElement = adCardTemplate.cloneNode(true);
-      var offer = ad.offer;
+      var offer = ad[id].offer;
 
       var title = adCardElement.querySelector('.popup__title');
       title.textContent = offer.title;
@@ -48,7 +76,7 @@
       price.textContent = offer.price + '₽/ночь';
 
       var housingType = adCardElement.querySelector('.popup__type');
-      housingType.textContent = offer.type;
+      housingType.textContent = OBJECTS_TYPES[offer.type];
 
       var guestsAndRoomsNumber = adCardElement.querySelector('.popup__text--capacity');
       guestsAndRoomsNumber.textContent = offer.rooms + ' комнаты для ' + offer.guests + ' гостей';
@@ -68,9 +96,16 @@
       photos.appendChild(window.util.getFragment(offer.photos, renderPhoto));
 
       var avatar = adCardElement.querySelector('.popup__avatar');
-      avatar.src = ad.autor.avatar;
+      avatar.src = ad[id].author.avatar;
 
-      return adCardElement;
+      var filters = window.util.map.querySelector('.map__filters-container');
+
+      var closeButton = adCardElement.querySelector('.popup__close');
+
+      window.util.map.insertBefore(adCardElement, filters);
+
+      closeButton.addEventListener('click', closeButtonClickHandler);
+      window.addEventListener('keydown', closeButtonKeydownHandler);
     }
   };
 })();
