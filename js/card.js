@@ -11,46 +11,6 @@
     'bungalo': 'Бунгало'
   };
 
-  var adCardTemplate = document.querySelector('#card')
-    .content
-    .querySelector('.map__card');
-
-  var renderFeature = function (adFeature) {
-    var feature = document.createElement('li');
-    feature.classList.add('popup__feature', 'popup__feature--' + adFeature);
-
-    return feature;
-  };
-
-  var renderPhoto = function (adPhoto) {
-    var photo = document.createElement('img');
-    photo.classList.add('popup__photo');
-    photo.src = adPhoto;
-    photo.width = PHOTO_WIDTH;
-    photo.height = PHOTO_HEIGHT;
-    photo.alt = PHOTO_ALT;
-
-    return photo;
-  };
-
-  var removeChilds = function (node) {
-    while (node.firstChild) {
-      node.removeChild(node.lastChild);
-    }
-  };
-
-  var closeButtonKeydownHandler = function (evt) {
-    if (evt.key === 'Escape') {
-      window.card.removeAdCard();
-    }
-  };
-
-  var closeButtonClickHandler = function (evt) {
-    if (evt.button === 0) {
-      window.card.removeAdCard();
-    }
-  };
-
   window.card = {
     removeAdCard: function () {
       var adCard = window.util.map.querySelector('.map__card');
@@ -106,6 +66,46 @@
 
       closeButton.addEventListener('click', closeButtonClickHandler);
       window.addEventListener('keydown', closeButtonKeydownHandler);
+    }
+  };
+
+  var adCardTemplate = document.querySelector('#card')
+    .content
+    .querySelector('.map__card');
+
+  var renderFeature = function (adFeature) {
+    var feature = document.createElement('li');
+    feature.classList.add('popup__feature', 'popup__feature--' + adFeature);
+
+    return feature;
+  };
+
+  var renderPhoto = function (adPhoto) {
+    var photo = document.createElement('img');
+    photo.classList.add('popup__photo');
+    photo.src = adPhoto;
+    photo.width = PHOTO_WIDTH;
+    photo.height = PHOTO_HEIGHT;
+    photo.alt = PHOTO_ALT;
+
+    return photo;
+  };
+
+  var removeChilds = function (node) {
+    while (node.firstChild) {
+      node.removeChild(node.lastChild);
+    }
+  };
+
+  var closeButtonKeydownHandler = function (evt) {
+    if (evt.key === 'Escape') {
+      window.card.removeAdCard();
+    }
+  };
+
+  var closeButtonClickHandler = function (evt) {
+    if (evt.button === 0) {
+      window.card.removeAdCard();
     }
   };
 })();

@@ -44,7 +44,7 @@
 
       limitMovingArea(coordX, 'left', minCoordLeft, maxCoordRight);
 
-      window.form.setAddressFieldValue();
+      window.form.changeAddressFieldValue();
     };
 
     var MouseUpHandler = function () {
