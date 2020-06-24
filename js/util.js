@@ -23,6 +23,11 @@
       });
 
       return fragment;
-    }
+    },
+    removeChild: function (node) {
+      node.remove();
+    },
+    body: document.querySelector('body'),
+    main: document.querySelector('main')
   };
 })();
