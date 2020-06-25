@@ -27,6 +27,11 @@
     removeChild: function (node) {
       node.remove();
     },
+    removeChilds: function (node) {
+      while (node.firstChild) {
+        node.removeChild(node.lastChild);
+      }
+    },
     body: document.querySelector('body'),
     main: document.querySelector('main')
   };

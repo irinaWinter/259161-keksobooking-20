@@ -45,14 +45,14 @@
       checkinAndCheckoutTime.textContent = 'Заезд после ' + offer.checkin + ', выезд до ' + offer.checkout;
 
       var features = adCardElement.querySelector('.popup__features');
-      removeChilds(features);
+      window.util.removeChilds(features);
       features.appendChild(window.util.getFragment(offer.features, renderFeature));
 
       var objectDescription = adCardElement.querySelector('.popup__description');
       objectDescription.textContent = offer.description;
 
       var photos = adCardElement.querySelector('.popup__photos');
-      removeChilds(photos);
+      window.util.removeChilds(photos);
       photos.appendChild(window.util.getFragment(offer.photos, renderPhoto));
 
       var avatar = adCardElement.querySelector('.popup__avatar');
@@ -89,12 +89,6 @@
     photo.alt = PHOTO_ALT;
 
     return photo;
-  };
-
-  var removeChilds = function (node) {
-    while (node.firstChild) {
-      node.removeChild(node.lastChild);
-    }
   };
 
   var closeButtonKeydownHandler = function (evt) {

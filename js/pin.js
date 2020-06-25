@@ -9,13 +9,12 @@
     .querySelector('.map__pin');
 
   window.pin = {
-    renderPin: function (ad, index) {
+    renderPin: function (ad, index, ads) {
       var pinElement = pinTemplate.cloneNode(true);
       var pinImg = pinElement.querySelector('img');
 
       pinElement.style = 'left: ' + (ad.location.x - PIN_WIDTH / 2) + 'px; top: ' + (ad.location.y - PIN_HEIGHT) + 'px;';
-      index = index === undefined ? 0 : index;
-      pinElement.id = 'pin-' + index;
+      pinElement.id = 'pin-' + ads.indexOf(ad);
       pinImg.src = ad.author.avatar;
       pinImg.alt = ad.offer.title;
 
