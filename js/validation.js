@@ -8,7 +8,7 @@
 
   // Выделение невалидных полей
   var showInvalidField = function (field) {
-    if (field.checkValidity() === false) {
+    if (!field.checkValidity()) {
       field.style.borderColor = FieldBorderColor.INVALID;
     }
   };
