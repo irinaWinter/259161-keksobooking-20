@@ -91,15 +91,20 @@
     return photo;
   };
 
+  var closeAdCard = function () {
+    window.card.removeAdCard();
+    window.map.deactivatePin(window.map.activePin);
+  };
+
   var closeButtonKeydownHandler = function (evt) {
     if (evt.key === 'Escape') {
-      window.card.removeAdCard();
+      closeAdCard();
     }
   };
 
   var closeButtonClickHandler = function (evt) {
     if (evt.button === 0) {
-      window.card.removeAdCard();
+      closeAdCard();
     }
   };
 })();
