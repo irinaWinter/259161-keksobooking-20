@@ -131,7 +131,6 @@
 
   var resetButtonClickHandler = function () {
     window.pageStates.deactivatePage();
-    window.util.filters.reset();
   };
 
   resetButton.addEventListener('click', resetButtonClickHandler);

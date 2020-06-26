@@ -4,10 +4,16 @@
   // Блокировка страницы
   window.pageStates = {
     deactivatePage: function () {
+      window.util.adForm.reset();
+      window.form.changeMinPrice();
+      window.form.verifyValidityOfCapacityField();
+      window.util.filters.reset();
       setDefaultPageState();
+
       window.form.setDefaultMainPinPosition();
+      window.form.setAddressFieldValue(window.form.getCenterCoordinates(window.util.mainPin, window.util.MAIN_PIN_WIDTH));
+
       window.card.removeAdCard();
-      window.reset.clearForm();
       window.map.pins = window.util.map.querySelectorAll('button[type=button]');
       window.map.pins.forEach(window.util.removeChild);
     }
