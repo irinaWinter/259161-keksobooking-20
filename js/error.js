@@ -6,7 +6,7 @@
 
   window.error = {
     showErrorMessage: function () {
-      window.util.main.appendChild(renderErrorMessage());
+      window.util.main.appendChild(message);
 
       window.util.body.style.overflow = 'hidden';
 
@@ -38,9 +38,7 @@
     .content
     .querySelector('.error');
 
-  var renderErrorMessage = function () {
-    return errorMessageTemplate.cloneNode(true);
-  };
+  var message = errorMessageTemplate.cloneNode(true);
 
   var closeButtonKeydownHandler = function (evt) {
     if (evt.key === 'Enter') {

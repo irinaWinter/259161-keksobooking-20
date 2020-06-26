@@ -5,7 +5,7 @@
 
   window.succsess = {
     showSuccsessMessage: function () {
-      window.util.main.appendChild(renderSuccsessMessage());
+      window.util.main.appendChild(message);
 
       window.util.body.style.overflow = 'hidden';
 
@@ -29,9 +29,7 @@
     .content
     .querySelector('.success');
 
-  var renderSuccsessMessage = function () {
-    return succsessMessageTemplate.cloneNode(true);
-  };
+  var message = succsessMessageTemplate.cloneNode(true);
 
   var successMessageKeydownHandler = function (evt) {
     if (evt.key === 'Escape') {

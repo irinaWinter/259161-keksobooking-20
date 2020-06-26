@@ -5,18 +5,24 @@
 
   // Добавление меток на страницу
   var pinsList = window.util.map.querySelector('.map__pins');
-  var adPins = pinsList.querySelectorAll('input[type=button]');
 
   window.map = {
     addPins: function (pins) {
       var takeNumber = pins.length > MAX_ADS_COUNT ? MAX_ADS_COUNT : pins.length;
-      window.util.removeChilds(adPins);
+
+      window.map.pins = window.util.map.querySelectorAll('button[type=button]');
+
+      if (window.map.pins) {
+        window.map.pins.forEach(window.util.removeChild);
+      }
 
       for (var i = 0; i < takeNumber; i++) {
         pinsList.appendChild(window.pin.renderPin(pins[i], i, pins));
       }
     },
-    id: 0
+    id: 0,
+    ads: [],
+    pins: ''
   };
 
   // Показ карточки объявления
@@ -26,10 +32,10 @@
   };
 
   var pinsListClickHandler = function (evt) {
-    var pinButton = evt.target.closest('button[type=button]');
-    if (pinButton || pinsList.contains(pinButton)) {
+    var pin = evt.target.closest('button[type=button]');
+    if (pin || pinsList.contains(pin)) {
       window.card.removeAdCard();
-      showAdCard(pinButton);
+      showAdCard(pin);
     }
   };
 

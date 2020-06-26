@@ -4,7 +4,7 @@
   var PHOTO_WIDTH = 45;
   var PHOTO_HEIGHT = 40;
   var PHOTO_ALT = 'Фотография жилья';
-  var OBJECTS_TYPES = {
+  var OBJECT_TYPE = {
     'palace': 'Дворец',
     'flat': 'Квартира',
     'house': 'Дом',
@@ -36,7 +36,7 @@
       price.textContent = offer.price + '₽/ночь';
 
       var housingType = adCardElement.querySelector('.popup__type');
-      housingType.textContent = OBJECTS_TYPES[offer.type];
+      housingType.textContent = OBJECT_TYPE[offer.type];
 
       var guestsAndRoomsNumber = adCardElement.querySelector('.popup__text--capacity');
       guestsAndRoomsNumber.textContent = offer.rooms + ' комнаты для ' + offer.guests + ' гостей';
@@ -66,7 +66,7 @@
 
       closeButton.addEventListener('click', closeButtonClickHandler);
       window.addEventListener('keydown', closeButtonKeydownHandler);
-    }
+    },
   };
 
   var adCardTemplate = document.querySelector('#card')
