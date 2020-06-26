@@ -8,7 +8,6 @@
       window.form.setDefaultMainPinPosition();
       window.card.removeAdCard();
       window.reset.clearForm();
-
       window.map.pins = window.util.map.querySelectorAll('button[type=button]');
       window.map.pins.forEach(window.util.removeChild);
     }
