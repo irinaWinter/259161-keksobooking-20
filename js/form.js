@@ -11,6 +11,8 @@
   var DEFAULT_COORD_Y = 375;
 
   window.form = {
+    title: window.util.adForm.querySelector('input[name=title]'),
+    price: window.util.adForm.querySelector('input[name=price]'),
     type: window.util.adForm.querySelector('select[name=type]'),
     changeAddressFieldValue: function () {
       window.form.setAddressFieldValue(getTipCoordinates(window.util.mainPin, window.util.MAIN_PIN_WIDTH, window.util.MAIN_PIN_HEIGHT));
@@ -69,12 +71,10 @@
     return window.form.type.value;
   };
 
-  var price = window.util.adForm.querySelector('input[name=price]');
-
   var setPrice = function (newPrice) {
-    price.min = newPrice;
-    price.placeholder = newPrice;
-    price.value = newPrice;
+    window.form.price.min = newPrice;
+    window.form.price.placeholder = newPrice;
+    window.form.price.value = newPrice;
   };
 
   window.form.changeMinPrice();
