@@ -1,14 +1,14 @@
 'use strict';
 
 (function () {
+  var NOT_FOR_GUESTS_ROOMS = 100;
+  var NOT_FOR_GUESTS = 0;
   var MinPrice = {
     BUNGALO: 0,
     FLAT: 1000,
     HOUSE: 5000,
     PALACE: 10000
   };
-  var NOT_FOR_GUESTS_ROOMS = 100;
-  var NOT_FOR_GUESTS = 0;
   var DefaultCoord = {
     X: 570,
     Y: 375
