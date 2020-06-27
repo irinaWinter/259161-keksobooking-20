@@ -62,7 +62,10 @@
   };
 
   var loadHandler = function (data) {
-    window.map.ads = data;
+    window.util.data = data;
+    window.map.ads = data.filter(function (it) {
+      return it.offer !== undefined;
+    });
     window.map.addPins(window.map.ads);
     mapFilters.forEach(makeEnabled);
   };

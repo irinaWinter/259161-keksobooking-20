@@ -34,6 +34,7 @@
       }
     },
     body: document.querySelector('body'),
-    main: document.querySelector('main')
+    main: document.querySelector('main'),
+    data: [],
   };
 })();

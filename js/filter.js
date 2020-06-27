@@ -39,7 +39,7 @@
     if (evt.target.value !== 'any') {
       ++total;
     }
-    console.log(total);
+    // console.log(total);
   };
 
   var compareRank = function (it) {
@@ -48,7 +48,7 @@
 
   var updateAds = function () {
     var filteredAds = window.map.ads.filter(compareRank);
-    console.log(filteredAds);
+    // console.log(filteredAds);
 
     window.card.removeAdCard();
     window.map.addPins(filteredAds);

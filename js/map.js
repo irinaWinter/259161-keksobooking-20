@@ -18,11 +18,14 @@
       }
 
       for (var i = 0; i < takeNumber; i++) {
-        pinsList.appendChild(window.pin.renderPin(pins[i], i, pins));
+        if (window.pin.renderPin(pins[i], i, pins)) {
+          pinsList.appendChild(window.pin.renderPin(pins[i], i, pins));
+        }
       }
     },
     id: 0,
     ads: [],
+    data: [],
     pins: '',
     activePin: '',
     deactivatePin: function (pin) {
