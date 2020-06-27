@@ -135,6 +135,9 @@
 
   var resetButtonClickHandler = function () {
     window.pageStates.deactivatePage();
+
+    window.validation.returnDefaultFieldStyle(window.form.title);
+    window.validation.returnDefaultFieldStyle(window.form.price);
   };
 
   resetButton.addEventListener('click', resetButtonClickHandler);

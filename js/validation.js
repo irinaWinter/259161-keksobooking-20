@@ -26,31 +26,33 @@
   submitButton.addEventListener('click', submitButtonClickHandler);
 
   // Отмена выделения невалидных полей
-  var returnDefaultStyle = function (field) {
-    field.style.borderColor = FieldBorderColor.DEFAULT;
+  window.validation = {
+    returnDefaultFieldStyle: function (field) {
+      field.style.borderColor = FieldBorderColor.DEFAULT;
+    }
   };
 
   var titleFieldKeydownHandler = function () {
-    returnDefaultStyle(window.form.title);
+    window.validation.returnDefaultFieldStyle(window.form.title);
   };
 
   var titleFieldPasteHandler = function () {
-    returnDefaultStyle(window.form.title);
+    window.validation.returnDefaultFieldStyle(window.form.title);
   };
 
   window.form.title.addEventListener('keydown', titleFieldKeydownHandler);
   window.form.title.addEventListener('paste', titleFieldPasteHandler);
 
   var priceFieldKeydownHandler = function () {
-    returnDefaultStyle(window.form.price);
+    window.validation.returnDefaultFieldStyle(window.form.price);
   };
 
   var priceFieldChangeHandler = function () {
-    returnDefaultStyle(window.form.price);
+    window.validation.returnDefaultFieldStyle(window.form.price);
   };
 
   var priceFieldPasteHandler = function () {
-    returnDefaultStyle(window.form.price);
+    window.validation.returnDefaultFieldStyle(window.form.price);
   };
 
   window.form.price.addEventListener('keydown', priceFieldKeydownHandler);
