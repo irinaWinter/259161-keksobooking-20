@@ -1,6 +1,15 @@
 'use strict';
 
 (function () {
+  var CoordY = {
+    TOP: 130,
+    BOTTOM: 630
+  };
+  var CoordX = {
+    LEFT: 0,
+    RIGHT: 1200
+  };
+
   var limitMovingArea = function (coord, position, minCoord, maxCoord) {
     if (coord < minCoord) {
       window.util.mainPin.style[position] = minCoord + 'px';
@@ -30,8 +39,8 @@
 
       window.util.mainPin.style.top = coordY + 'px';
 
-      var minCoordTop = window.util.COORD_Y_TOP - window.util.MAIN_PIN_HEIGHT;
-      var maxCoordBottom = window.util.COORD_Y_BOTTOM - window.util.MAIN_PIN_HEIGHT;
+      var minCoordTop = CoordY.TOP - window.util.MainPin.HEIGHT;
+      var maxCoordBottom = CoordY.BOTTOM - window.util.MainPin.HEIGHT;
 
       limitMovingArea(coordY, 'top', minCoordTop, maxCoordBottom);
 
@@ -39,8 +48,8 @@
 
       window.util.mainPin.style.left = coordX + 'px';
 
-      var minCoordLeft = window.util.COORD_X_LEFT - window.util.MAIN_PIN_WIDTH / 2;
-      var maxCoordRight = window.util.COORD_X_RIGHT - window.util.MAIN_PIN_WIDTH / 2;
+      var minCoordLeft = CoordX.LEFT - window.util.MainPin.WIDTH / 2;
+      var maxCoordRight = CoordX.RIGHT - window.util.MainPin.WIDTH / 2;
 
       limitMovingArea(coordX, 'left', minCoordLeft, maxCoordRight);
 

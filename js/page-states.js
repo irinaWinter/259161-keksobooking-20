@@ -8,10 +8,10 @@
       window.form.changeMinPrice();
       window.form.verifyValidityOfCapacityField();
       window.util.filters.reset();
-      setDefaultPageState();
 
+      setDefaultPageState();
       window.form.setDefaultMainPinPosition();
-      window.form.setAddressFieldValue(window.form.getCenterCoordinates(window.util.mainPin, window.util.MAIN_PIN_WIDTH));
+      window.form.setAddressFieldValue(window.form.getCenterCoordinates(window.util.mainPin, window.util.MainPin.WIDTH));
 
       window.card.removeAdCard();
       window.map.pins = window.util.map.querySelectorAll('button[type=button]');

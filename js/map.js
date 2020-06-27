@@ -25,7 +25,6 @@
     },
     id: 0,
     ads: [],
-    data: [],
     pins: '',
     activePin: '',
     deactivatePin: function (pin) {

@@ -1,10 +1,12 @@
 'use strict';
 
 (function () {
-  var PHOTO_WIDTH = 45;
-  var PHOTO_HEIGHT = 40;
-  var PHOTO_ALT = 'Фотография жилья';
-  var OBJECT_TYPE = {
+  var Photo = {
+    WIDTH: 45,
+    HEIGHT: 40,
+    ALT: 'Фотография жилья'
+  };
+  var objectTypes = {
     'palace': 'Дворец',
     'flat': 'Квартира',
     'house': 'Дом',
@@ -36,7 +38,7 @@
       price.textContent = offer.price + '₽/ночь';
 
       var housingType = adCardElement.querySelector('.popup__type');
-      housingType.textContent = OBJECT_TYPE[offer.type];
+      housingType.textContent = objectTypes[offer.type];
 
       var guestsAndRoomsNumber = adCardElement.querySelector('.popup__text--capacity');
       guestsAndRoomsNumber.textContent = offer.rooms + ' комнаты для ' + offer.guests + ' гостей';
@@ -84,9 +86,9 @@
     var photo = document.createElement('img');
     photo.classList.add('popup__photo');
     photo.src = adPhoto;
-    photo.width = PHOTO_WIDTH;
-    photo.height = PHOTO_HEIGHT;
-    photo.alt = PHOTO_ALT;
+    photo.width = Photo.WIDTH;
+    photo.height = Photo.HEIGHT;
+    photo.alt = Photo.ALT;
 
     return photo;
   };
