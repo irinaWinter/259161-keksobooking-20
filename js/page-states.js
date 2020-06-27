@@ -4,13 +4,18 @@
   // Блокировка страницы
   window.pageStates = {
     deactivatePage: function () {
+      window.util.adForm.reset();
+      window.form.changeMinPrice();
+      window.form.verifyValidityOfCapacityField();
+      window.util.filters.reset();
+
       setDefaultPageState();
       window.form.setDefaultMainPinPosition();
-      window.card.removeAdCard();
-      window.reset.clearForm();
+      window.form.setAddressFieldValue(window.form.getCenterCoordinates(window.util.mainPin, window.util.MainPin.WIDTH));
 
-      var ads = window.util.map.querySelectorAll('button[type=button]');
-      ads.forEach(window.util.removeChild);
+      window.card.removeAdCard();
+      window.map.pins = window.util.map.querySelectorAll('button[type=button]');
+      window.map.pins.forEach(window.util.removeChild);
     }
   };
 
@@ -39,11 +44,6 @@
     item.disabled = false;
   };
 
-  var activateElement = function (item, elements, removableClass) {
-    elements.forEach(makeEnabled);
-    item.classList.remove(removableClass);
-  };
-
   var mainPinRemoveHandlers = function () {
     window.util.mainPin.removeEventListener('mousedown', mainPinClickHandler);
     window.util.mainPin.removeEventListener('keydown', mainPinKeydownHandler);
@@ -61,11 +61,20 @@
     }
   };
 
-  var activatePage = function () {
-    activateElement(window.util.map, mapFilters, 'map--faded');
-    activateElement(window.util.adForm, adFormFieldsets, 'ad-form--disabled');
+  var loadHandler = function (data) {
+    window.util.data = data;
+    window.map.ads = data.filter(function (it) {
+      return it.offer !== undefined;
+    });
+    window.map.addPins(window.map.ads);
+    mapFilters.forEach(makeEnabled);
+  };
 
-    window.backend.load(window.map.addPins);
+  var activatePage = function () {
+    window.util.adForm.classList.remove('ad-form--disabled');
+    window.util.map.classList.remove('map--faded');
+    window.backend.load(loadHandler);
+    adFormFieldsets.forEach(makeEnabled);
     window.form.changeAddressFieldValue();
     mainPinRemoveHandlers();
   };

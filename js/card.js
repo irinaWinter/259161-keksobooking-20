@@ -1,10 +1,12 @@
 'use strict';
 
 (function () {
-  var PHOTO_WIDTH = 45;
-  var PHOTO_HEIGHT = 40;
-  var PHOTO_ALT = 'Фотография жилья';
-  var OBJECTS_TYPES = {
+  var Photo = {
+    WIDTH: 45,
+    HEIGHT: 40,
+    ALT: 'Фотография жилья'
+  };
+  var objectTypes = {
     'palace': 'Дворец',
     'flat': 'Квартира',
     'house': 'Дом',
@@ -36,7 +38,7 @@
       price.textContent = offer.price + '₽/ночь';
 
       var housingType = adCardElement.querySelector('.popup__type');
-      housingType.textContent = OBJECTS_TYPES[offer.type];
+      housingType.textContent = objectTypes[offer.type];
 
       var guestsAndRoomsNumber = adCardElement.querySelector('.popup__text--capacity');
       guestsAndRoomsNumber.textContent = offer.rooms + ' комнаты для ' + offer.guests + ' гостей';
@@ -45,14 +47,14 @@
       checkinAndCheckoutTime.textContent = 'Заезд после ' + offer.checkin + ', выезд до ' + offer.checkout;
 
       var features = adCardElement.querySelector('.popup__features');
-      removeChilds(features);
+      window.util.removeChilds(features);
       features.appendChild(window.util.getFragment(offer.features, renderFeature));
 
       var objectDescription = adCardElement.querySelector('.popup__description');
       objectDescription.textContent = offer.description;
 
       var photos = adCardElement.querySelector('.popup__photos');
-      removeChilds(photos);
+      window.util.removeChilds(photos);
       photos.appendChild(window.util.getFragment(offer.photos, renderPhoto));
 
       var avatar = adCardElement.querySelector('.popup__avatar');
@@ -66,7 +68,7 @@
 
       closeButton.addEventListener('click', closeButtonClickHandler);
       window.addEventListener('keydown', closeButtonKeydownHandler);
-    }
+    },
   };
 
   var adCardTemplate = document.querySelector('#card')
@@ -84,28 +86,27 @@
     var photo = document.createElement('img');
     photo.classList.add('popup__photo');
     photo.src = adPhoto;
-    photo.width = PHOTO_WIDTH;
-    photo.height = PHOTO_HEIGHT;
-    photo.alt = PHOTO_ALT;
+    photo.width = Photo.WIDTH;
+    photo.height = Photo.HEIGHT;
+    photo.alt = Photo.ALT;
 
     return photo;
   };
 
-  var removeChilds = function (node) {
-    while (node.firstChild) {
-      node.removeChild(node.lastChild);
-    }
+  var closeAdCard = function () {
+    window.card.removeAdCard();
+    window.map.deactivatePin(window.map.activePin);
   };
 
   var closeButtonKeydownHandler = function (evt) {
     if (evt.key === 'Escape') {
-      window.card.removeAdCard();
+      closeAdCard();
     }
   };
 
   var closeButtonClickHandler = function (evt) {
     if (evt.button === 0) {
-      window.card.removeAdCard();
+      closeAdCard();
     }
   };
 })();

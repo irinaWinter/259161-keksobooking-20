@@ -3,6 +3,7 @@
 (function () {
   var adFormSubmitHandler = function () {
     window.pageStates.deactivatePage();
+    window.util.filters.reset();
     window.succsess.showSuccsessMessage();
   };
 

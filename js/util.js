@@ -2,15 +2,14 @@
 
 (function () {
   window.util = {
-    MAIN_PIN_WIDTH: 62,
-    MAIN_PIN_HEIGHT: 84,
-    COORD_Y_TOP: 130,
-    COORD_Y_BOTTOM: 630,
-    COORD_X_LEFT: 0,
-    COORD_X_RIGHT: 1200,
+    MainPin: {
+      WIDTH: 62,
+      HEIGHT: 84
+    },
     map: document.querySelector('.map'),
     mainPin: document.querySelector('.map__pin--main'),
     adForm: document.querySelector('.ad-form'),
+    filters: document.querySelector('.map__filters'),
     getFragment: function (data, action) {
       var fragment = document.createDocumentFragment();
 
@@ -27,7 +26,13 @@
     removeChild: function (node) {
       node.remove();
     },
+    removeChilds: function (node) {
+      while (node.firstChild) {
+        node.removeChild(node.lastChild);
+      }
+    },
     body: document.querySelector('body'),
-    main: document.querySelector('main')
+    main: document.querySelector('main'),
+    data: [],
   };
 })();

@@ -1,19 +1,25 @@
 'use strict';
 
 (function () {
-  var BUNGALO_MIN_PRICE = 0;
-  var FLAT_MIN_PRICE = 1000;
-  var HOUSE_MIN_PRICE = 5000;
-  var PALACE_MIN_PRICE = 10000;
   var NOT_FOR_GUESTS_ROOMS = 100;
   var NOT_FOR_GUESTS = 0;
-  var DEFAULT_COORD_X = 570;
-  var DEFAULT_COORD_Y = 375;
+  var MinPrice = {
+    BUNGALO: 0,
+    FLAT: 1000,
+    HOUSE: 5000,
+    PALACE: 10000
+  };
+  var DefaultCoord = {
+    X: 570,
+    Y: 375
+  };
 
   window.form = {
+    title: window.util.adForm.querySelector('input[name=title]'),
+    price: window.util.adForm.querySelector('input[name=price]'),
     type: window.util.adForm.querySelector('select[name=type]'),
     changeAddressFieldValue: function () {
-      window.form.setAddressFieldValue(getTipCoordinates(window.util.mainPin, window.util.MAIN_PIN_WIDTH, window.util.MAIN_PIN_HEIGHT));
+      window.form.setAddressFieldValue(getTipCoordinates(window.util.mainPin, window.util.MainPin.WIDTH, window.util.MainPin.HEIGHT));
     },
     getCenterCoordinates: function (pin, size) {
       return (parseInt(pin.style.left, 10) + size / 2) + ', ' + (parseInt(pin.style.top, 10) + size / 2);
@@ -26,16 +32,16 @@
 
       switch (typeValue) {
         case 'bungalo':
-          setPrice(BUNGALO_MIN_PRICE);
+          setPrice(MinPrice.BUNGALO);
           break;
         case 'flat':
-          setPrice(FLAT_MIN_PRICE);
+          setPrice(MinPrice.FLAT);
           break;
         case 'house':
-          setPrice(HOUSE_MIN_PRICE);
+          setPrice(MinPrice.HOUSE);
           break;
         case 'palace':
-          setPrice(PALACE_MIN_PRICE);
+          setPrice(MinPrice.PALACE);
           break;
       }
     },
@@ -50,8 +56,8 @@
       capacityOptions.forEach(limitChoiceOfCapacityOptions);
     },
     setDefaultMainPinPosition: function () {
-      window.util.mainPin.style.left = DEFAULT_COORD_X + 'px';
-      window.util.mainPin.style.top = DEFAULT_COORD_Y + 'px';
+      window.util.mainPin.style.left = DefaultCoord.X + 'px';
+      window.util.mainPin.style.top = DefaultCoord.Y + 'px';
     }
   };
 
@@ -62,19 +68,17 @@
   // Заполнение поля "Адрес"
   var addressField = window.util.adForm.querySelector('input[name=address]');
 
-  window.form.setAddressFieldValue(window.form.getCenterCoordinates(window.util.mainPin, window.util.MAIN_PIN_WIDTH));
+  window.form.setAddressFieldValue(window.form.getCenterCoordinates(window.util.mainPin, window.util.MainPin.WIDTH));
 
   // Валидация поля "Цена за ночь"
   var getTypeValue = function () {
     return window.form.type.value;
   };
 
-  var price = window.util.adForm.querySelector('input[name=price]');
-
   var setPrice = function (newPrice) {
-    price.min = newPrice;
-    price.placeholder = newPrice;
-    price.value = newPrice;
+    window.form.price.min = newPrice;
+    window.form.price.placeholder = newPrice;
+    window.form.price.value = newPrice;
   };
 
   window.form.changeMinPrice();
@@ -131,6 +135,9 @@
 
   var resetButtonClickHandler = function () {
     window.pageStates.deactivatePage();
+
+    window.validation.returnDefaultFieldStyle(window.form.title);
+    window.validation.returnDefaultFieldStyle(window.form.price);
   };
 
   resetButton.addEventListener('click', resetButtonClickHandler);
