@@ -11,17 +11,17 @@
     var rank = 0;
 
     if (ad.offer.type === type.value) {
-      rank += 1;
+      rank++;
     }
 
     // Price
 
     if (ad.offer.rooms === +rooms.value) {
-      rank += 1;
+      rank++;
     }
 
     if (ad.offer.guests === +guests.value) {
-      rank += 1;
+      rank++;
     }
 
     // Features
@@ -32,16 +32,14 @@
   var total = 0;
 
   var changeTotal = function (evt) {
-    var currentValue;
-
-    if (evt.target.value !== 'any' && (currentValue === 'any' || !currentValue)) {
-      total++;
-    } else if (evt.target.value !== 'any' && currentValue !== 'any') {
-      total = total;
-    } else if (evt.target.value === 'any' && evt.target.value !== currentValue) {
+    if (total) {
       total--;
     }
-    currentValue = evt.target.value;
+
+    if (evt.target.value !== 'any') {
+      ++total;
+    }
+    console.log(total);
   };
 
   var compareRank = function (it) {
