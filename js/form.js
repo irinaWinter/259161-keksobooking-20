@@ -131,14 +131,25 @@
   window.form.rooms.addEventListener('change', roomsChangeHandler);
 
   // Сброс формы
-  var resetButton = window.util.adForm.querySelector('button[type=reset]');
+  var resetButtonClickHandler = function (evt) {
+    if (evt.buttons === 1) {
+      window.pageStates.deactivatePage();
 
-  var resetButtonClickHandler = function () {
-    window.pageStates.deactivatePage();
-
-    window.validation.returnDefaultFieldStyle(window.form.title);
-    window.validation.returnDefaultFieldStyle(window.form.price);
+      window.validation.returnDefaultFieldStyle(window.form.title);
+      window.validation.returnDefaultFieldStyle(window.form.price);
+    }
   };
 
-  resetButton.addEventListener('click', resetButtonClickHandler);
+  var resetButtonKeydownHandler = function (evt) {
+    if (evt.key === 'Enter') {
+      window.pageStates.deactivatePage();
+
+      window.validation.returnDefaultFieldStyle(window.form.title);
+      window.validation.returnDefaultFieldStyle(window.form.price);
+    }
+  };
+
+  var resetButton = window.util.adForm.querySelector('button[type=reset]');
+  resetButton.addEventListener('mousedown', resetButtonClickHandler);
+  resetButton.addEventListener('keyup', resetButtonKeydownHandler);
 })();
