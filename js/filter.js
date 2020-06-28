@@ -2,6 +2,10 @@
 
 (function () {
   var type = document.querySelector('#housing-type');
+  // Price
+  var rooms = document.querySelector('#housing-rooms');
+  var guests = document.querySelector('#housing-guests');
+  // Features
 
   var getRank = function (ad) {
     var rank = 0;
@@ -10,36 +14,55 @@
       rank++;
     }
 
+    // Price
+
+    if (ad.offer.rooms === +rooms.value) {
+      rank++;
+    }
+
+    if (ad.offer.guests === +guests.value) {
+      rank++;
+    }
+
+    // Features
+
     return rank;
   };
 
-  var changeTotal = function (evt) {
-    var total = 0;
+  var total;
 
-    if (total) {
-      total--;
-    }
+  var changeTotal = function () {
+    total = 0;
 
-    if (evt.target.value !== 'any') {
-      total++;
-    }
+    // console.log(filter.children);
+    Array.from(filter.children).forEach(function (it) {
+      if (it.value !== 'any' && it.value) {
+        total++;
+      }
+      // console.log(it.value);
+    });
 
+    // console.log(total);
     return total;
   };
 
-  var updateAds = function (evt) {
-    var filteredAds = window.map.ads.filter(function (ad) {
-      return getRank(ad) === changeTotal(evt);
-    });
+  var compareRank = function (it) {
+    return getRank(it) === total;
+  };
+
+  var updateAds = function () {
+    var filteredAds = window.map.ads.filter(compareRank);
+    // console.log(filteredAds);
 
     window.card.removeAdCard();
     window.map.addPins(filteredAds);
   };
 
-  var typeChangeHandler = function (evt) {
-    changeTotal(evt);
-    updateAds(evt);
+  var filterChangeHandler = function () {
+    changeTotal();
+    updateAds();
   };
 
-  type.addEventListener('change', typeChangeHandler);
+  var filter = document.querySelector('.map__filters');
+  filter.addEventListener('change', filterChangeHandler);
 })();
