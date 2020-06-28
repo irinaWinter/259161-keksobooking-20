@@ -1,8 +1,12 @@
 'use strict';
 
 (function () {
+  var housingPrice = {
+    'low': 10000,
+    'middle': 50000,
+  };
   var type = document.querySelector('#housing-type');
-  // Price
+  var price = document.querySelector('#housing-price');
   var rooms = document.querySelector('#housing-rooms');
   var guests = document.querySelector('#housing-guests');
   // Features
@@ -14,7 +18,23 @@
       rank++;
     }
 
-    // Price
+    switch (price.value) {
+      case 'low':
+        if (ad.offer.price < housingPrice.low) {
+          rank++;
+        }
+        break;
+      case 'middle':
+        if (ad.offer.price >= housingPrice.low && ad.offer.price <= housingPrice.middle) {
+          rank++;
+        }
+        break;
+      case 'high':
+        if (ad.offer.price > housingPrice.middle) {
+          rank++;
+        }
+        break;
+    }
 
     if (ad.offer.rooms === +rooms.value) {
       rank++;
@@ -34,15 +54,12 @@
   var changeTotal = function () {
     total = 0;
 
-    // console.log(filter.children);
     Array.from(filter.children).forEach(function (it) {
       if (it.value !== 'any' && it.value) {
         total++;
       }
-      // console.log(it.value);
     });
 
-    // console.log(total);
     return total;
   };
 
@@ -52,7 +69,6 @@
 
   var updateAds = function () {
     var filteredAds = window.map.ads.filter(compareRank);
-    // console.log(filteredAds);
 
     window.card.removeAdCard();
     window.map.addPins(filteredAds);
