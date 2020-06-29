@@ -86,14 +86,14 @@
 
   var updateAds = function () {
     window.card.removeAdCard();
+    changeTotal();
 
     var filteredAds = window.map.ads.filter(compareRank);
     window.map.addPins(filteredAds);
   };
 
   var filterChangeHandler = function () {
-    changeTotal();
-    updateAds();
+    window.debounce(updateAds);
   };
 
   var filter = document.querySelector('.map__filters');
