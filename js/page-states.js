@@ -2,11 +2,11 @@
 
 (function () {
   // Загрузка страницы
-  var documentReloadHandler = function () {
+  var documentLoadHandler = function () {
     window.pageStates.deactivatePage();
   };
 
-  window.addEventListener('load', documentReloadHandler);
+  window.addEventListener('load', documentLoadHandler);
 
   // Блокировка страницы
   window.pageStates = {

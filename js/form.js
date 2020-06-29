@@ -66,10 +66,7 @@
     return (parseInt(pin.style.left, 10) + width / 2) + ', ' + (parseInt(pin.style.top, 10) + height);
   };
 
-  // Заполнение поля "Адрес"
   var addressField = window.util.adForm.querySelector('input[name=address]');
-
-  window.form.setAddressFieldValue(window.form.getCenterCoordinates(window.util.mainPin, window.util.MainPin.WIDTH));
 
   // Валидация поля "Цена за ночь"
   var getTypeValue = function () {
@@ -81,8 +78,6 @@
     window.form.price.placeholder = newPrice;
     window.form.price.value = newPrice;
   };
-
-  window.form.changeMinPrice();
 
   var typeChanngeHandler = function () {
     window.form.changeMinPrice();
@@ -122,8 +117,6 @@
   };
 
   var capacity = window.util.adForm.querySelector('select[name=capacity]');
-
-  window.form.verifyValidityOfCapacityField();
 
   var roomsChangeHandler = function () {
     window.form.verifyValidityOfCapacityField();
