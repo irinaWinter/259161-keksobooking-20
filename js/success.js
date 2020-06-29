@@ -5,6 +5,8 @@
 
   window.succsess = {
     showSuccsessMessage: function () {
+      window.form.submitButton.blur();
+
       window.util.main.appendChild(message);
 
       window.util.body.style.overflow = 'hidden';
@@ -18,7 +20,6 @@
 
   var removeSuccsessMessage = function () {
     successMessage.remove();
-
     window.util.body.style.overflow = 'visible';
 
     window.removeEventListener('keydown', successMessageKeydownHandler);

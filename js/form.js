@@ -18,6 +18,7 @@
     title: window.util.adForm.querySelector('input[name=title]'),
     price: window.util.adForm.querySelector('input[name=price]'),
     type: window.util.adForm.querySelector('select[name=type]'),
+    submitButton: window.util.adForm.querySelector('button[type=submit]'),
     changeAddressFieldValue: function () {
       window.form.setAddressFieldValue(getTipCoordinates(window.util.mainPin, window.util.MainPin.WIDTH, window.util.MainPin.HEIGHT));
     },
@@ -65,10 +66,7 @@
     return (parseInt(pin.style.left, 10) + width / 2) + ', ' + (parseInt(pin.style.top, 10) + height);
   };
 
-  // Заполнение поля "Адрес"
   var addressField = window.util.adForm.querySelector('input[name=address]');
-
-  window.form.setAddressFieldValue(window.form.getCenterCoordinates(window.util.mainPin, window.util.MainPin.WIDTH));
 
   // Валидация поля "Цена за ночь"
   var getTypeValue = function () {
@@ -80,8 +78,6 @@
     window.form.price.placeholder = newPrice;
     window.form.price.value = newPrice;
   };
-
-  window.form.changeMinPrice();
 
   var typeChanngeHandler = function () {
     window.form.changeMinPrice();
@@ -122,8 +118,6 @@
 
   var capacity = window.util.adForm.querySelector('select[name=capacity]');
 
-  window.form.verifyValidityOfCapacityField();
-
   var roomsChangeHandler = function () {
     window.form.verifyValidityOfCapacityField();
   };
@@ -131,14 +125,25 @@
   window.form.rooms.addEventListener('change', roomsChangeHandler);
 
   // Сброс формы
-  var resetButton = window.util.adForm.querySelector('button[type=reset]');
+  var resetButtonClickHandler = function (evt) {
+    if (evt.buttons === 1) {
+      window.pageStates.deactivatePage();
 
-  var resetButtonClickHandler = function () {
-    window.pageStates.deactivatePage();
-
-    window.validation.returnDefaultFieldStyle(window.form.title);
-    window.validation.returnDefaultFieldStyle(window.form.price);
+      window.validation.returnDefaultFieldStyle(window.form.title);
+      window.validation.returnDefaultFieldStyle(window.form.price);
+    }
   };
 
-  resetButton.addEventListener('click', resetButtonClickHandler);
+  var resetButtonKeydownHandler = function (evt) {
+    if (evt.key === 'Enter') {
+      window.pageStates.deactivatePage();
+
+      window.validation.returnDefaultFieldStyle(window.form.title);
+      window.validation.returnDefaultFieldStyle(window.form.price);
+    }
+  };
+
+  var resetButton = window.util.adForm.querySelector('button[type=reset]');
+  resetButton.addEventListener('mousedown', resetButtonClickHandler);
+  resetButton.addEventListener('keyup', resetButtonKeydownHandler);
 })();

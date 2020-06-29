@@ -1,21 +1,34 @@
 'use strict';
 
 (function () {
+  // Загрузка страницы
+  var documentLoadHandler = function () {
+    window.pageStates.deactivatePage();
+  };
+
+  window.addEventListener('load', documentLoadHandler);
+
   // Блокировка страницы
   window.pageStates = {
     deactivatePage: function () {
+      deactivateElement(window.util.map, mapFilters, 'map--faded');
+      deactivateElement(window.util.adForm, adFormFieldsets, 'ad-form--disabled');
+
       window.util.adForm.reset();
-      window.form.changeMinPrice();
-      window.form.verifyValidityOfCapacityField();
       window.util.filters.reset();
 
-      setDefaultPageState();
+      window.form.changeMinPrice();
+      window.form.verifyValidityOfCapacityField();
       window.form.setDefaultMainPinPosition();
       window.form.setAddressFieldValue(window.form.getCenterCoordinates(window.util.mainPin, window.util.MainPin.WIDTH));
 
       window.card.removeAdCard();
+
       window.map.pins = window.util.map.querySelectorAll('button[type=button]');
       window.map.pins.forEach(window.util.removeChild);
+
+      window.util.mainPin.addEventListener('mousedown', mainPinClickHandler);
+      window.util.mainPin.addEventListener('keydown', mainPinKeydownHandler);
     }
   };
 
@@ -30,14 +43,6 @@
 
   var mapFilters = window.util.map.querySelectorAll('.map__filters select, .map__filters fieldset');
   var adFormFieldsets = window.util.adForm.querySelectorAll('fieldset');
-
-  var setDefaultPageState = function () {
-    deactivateElement(window.util.map, mapFilters, 'map--faded');
-    deactivateElement(window.util.adForm, adFormFieldsets, 'ad-form--disabled');
-
-    window.util.mainPin.addEventListener('mousedown', mainPinClickHandler);
-    window.util.mainPin.addEventListener('keydown', mainPinKeydownHandler);
-  };
 
   // Активация страницы
   var makeEnabled = function (item) {
@@ -78,6 +83,4 @@
     window.form.changeAddressFieldValue();
     mainPinRemoveHandlers();
   };
-
-  setDefaultPageState();
 })();
