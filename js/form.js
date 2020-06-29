@@ -18,6 +18,7 @@
     title: window.util.adForm.querySelector('input[name=title]'),
     price: window.util.adForm.querySelector('input[name=price]'),
     type: window.util.adForm.querySelector('select[name=type]'),
+    submitButton: window.util.adForm.querySelector('button[type=submit]'),
     changeAddressFieldValue: function () {
       window.form.setAddressFieldValue(getTipCoordinates(window.util.mainPin, window.util.MainPin.WIDTH, window.util.MainPin.HEIGHT));
     },

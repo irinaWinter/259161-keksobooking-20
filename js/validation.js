@@ -22,8 +22,7 @@
     validateFields();
   };
 
-  var submitButton = window.util.adForm.querySelector('button[type=submit]');
-  submitButton.addEventListener('click', submitButtonClickHandler);
+  window.form.submitButton.addEventListener('click', submitButtonClickHandler);
 
   // Отмена выделения невалидных полей
   window.validation = {
