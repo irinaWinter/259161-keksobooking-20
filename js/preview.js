@@ -19,16 +19,22 @@
     }
   };
 
+  var checkFormat = function (fileChooser) {
+    var file = fileChooser.files[0];
+    var fileName = file.name.toLowerCase();
+
+    var matches = FILE_TYPES.some(function (item) {
+      return fileName.endsWith(item);
+    });
+
+    return matches ? file : false;
+  };
+
   var setPreview = function (fileChooser, preview) {
     if (fileChooser.value) {
-      var file = fileChooser.files[0];
-      var fileName = file.name.toLowerCase();
+      var file = checkFormat(fileChooser);
 
-      var matches = FILE_TYPES.some(function (item) {
-        return fileName.endsWith(item);
-      });
-
-      if (matches) {
+      if (file) {
         var reader = new FileReader();
 
         reader.addEventListener('load', function () {
@@ -44,7 +50,15 @@
   var avatarChooser = window.util.adForm.querySelector('input[name=avatar]');
 
   var avatarChooserChangeHandler = function () {
-    setPreview(avatarChooser, window.preview.avatarPreview);
+    if (avatarChooser.value) {
+
+      if (checkFormat(avatarChooser)) {
+        setPreview(avatarChooser, window.preview.avatarPreview);
+      } else {
+        avatarChooser.value = '';
+        window.preview.setDefaultAvatarPreview();
+      }
+    }
   };
 
   avatarChooser.addEventListener('change', avatarChooserChangeHandler);
@@ -65,11 +79,20 @@
   var imageChooser = window.util.adForm.querySelector('input[name=images]');
 
   var imageChooserChangeHandler = function () {
-    if (!window.preview.imagePreview) {
-      window.preview.imagePreview = createHousingImg();
-    }
+    if (imageChooser.value) {
 
-    setPreview(imageChooser, window.preview.imagePreview);
+      if (checkFormat(imageChooser)) {
+
+        if (!window.preview.imagePreview) {
+          window.preview.imagePreview = createHousingImg();
+        }
+
+        setPreview(imageChooser, window.preview.imagePreview);
+      } else {
+        imageChooser.value = '';
+        window.preview.setDefaultImgPreview();
+      }
+    }
   };
 
   imageChooser.addEventListener('change', imageChooserChangeHandler);
