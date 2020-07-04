@@ -3,6 +3,12 @@
 (function () {
   var NOT_FOR_GUESTS_ROOMS = 100;
   var NOT_FOR_GUESTS = 0;
+  var HousingType = {
+    BUNGALO: 'bungalo',
+    FLAT: 'flat',
+    HOUSE: 'house',
+    PALACE: 'palace'
+  };
   var MinPrice = {
     BUNGALO: 0,
     FLAT: 1000,
@@ -32,16 +38,16 @@
       var typeValue = getTypeValue();
 
       switch (typeValue) {
-        case 'bungalo':
+        case HousingType.BUNGALO:
           setPrice(MinPrice.BUNGALO);
           break;
-        case 'flat':
+        case HousingType.FLAT:
           setPrice(MinPrice.FLAT);
           break;
-        case 'house':
+        case HousingType.BUNGALO.HOUSE:
           setPrice(MinPrice.HOUSE);
           break;
-        case 'palace':
+        case HousingType.PALACE:
           setPrice(MinPrice.PALACE);
           break;
       }
@@ -136,13 +142,13 @@
   };
 
   var resetButtonClickHandler = function (evt) {
-    if (evt.buttons === 1) {
+    if (evt.buttons === window.util.Key.LEFT_BUTTON) {
       resetForm();
     }
   };
 
   var resetButtonKeydownHandler = function (evt) {
-    if (evt.key === 'Enter') {
+    if (evt.key === window.util.Key.ENTER) {
       resetForm();
     }
   };

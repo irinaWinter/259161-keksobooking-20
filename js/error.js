@@ -41,26 +41,26 @@
   var message = errorMessageTemplate.cloneNode(true);
 
   var closeButtonKeydownHandler = function (evt) {
-    if (evt.key === 'Enter') {
+    if (evt.key === window.util.Key.ENTER) {
       removeErrorMessage();
     }
   };
 
   var closeButtonClickHandler = function (evt) {
-    if (evt.button === 0) {
+    if (evt.button === window.util.Key.LEFT_CLICK) {
       removeErrorMessage();
     }
   };
 
   var errorMessageKeydownHandler = function (evt) {
     switch (evt.key) {
-      case 'Escape':
+      case window.util.Key.ESC:
         removeErrorMessage();
         break;
-      case 'Enter':
+      case window.util.Key.LEFT_CLICK:
         evt.preventDefault();
         break;
-      case 'Tab':
+      case window.util.Key.TAB:
         closeButton.focus();
         evt.preventDefault();
         break;
@@ -68,7 +68,7 @@
   };
 
   var errorMessageClickHandler = function (evt) {
-    if (evt.button === 0) {
+    if (evt.button === window.util.Key.LEFT_CLICK) {
       removeErrorMessage();
     }
   };

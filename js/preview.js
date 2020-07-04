@@ -3,6 +3,7 @@
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
   var DEFAULT_AVATAR_PREVIEW = 'img/muffin-grey.svg';
+  var HOUSE_PHOTO_ALT = 'Фотография жилья';
 
   window.preview = {
     avatarPreview: window.util.adForm.querySelector('.ad-form-header__preview img'),
@@ -56,7 +57,7 @@
     imageContainer.appendChild(img);
 
     img.style = 'width: inherit; height: inherit; border-radius: inherit;';
-    img.alt = 'Фотография жилья';
+    img.alt = HOUSE_PHOTO_ALT;
 
     return img;
   };
