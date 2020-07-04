@@ -125,21 +125,25 @@
   window.form.rooms.addEventListener('change', roomsChangeHandler);
 
   // Сброс формы
+  var resetForm = function () {
+    window.pageStates.deactivatePage();
+
+    window.validation.returnDefaultFieldStyle(window.form.title);
+    window.validation.returnDefaultFieldStyle(window.form.price);
+
+    window.preview.setDefaultAvatarPreview();
+    window.preview.setDefaultImgPreview();
+  };
+
   var resetButtonClickHandler = function (evt) {
     if (evt.buttons === 1) {
-      window.pageStates.deactivatePage();
-
-      window.validation.returnDefaultFieldStyle(window.form.title);
-      window.validation.returnDefaultFieldStyle(window.form.price);
+      resetForm();
     }
   };
 
   var resetButtonKeydownHandler = function (evt) {
     if (evt.key === 'Enter') {
-      window.pageStates.deactivatePage();
-
-      window.validation.returnDefaultFieldStyle(window.form.title);
-      window.validation.returnDefaultFieldStyle(window.form.price);
+      resetForm();
     }
   };
 

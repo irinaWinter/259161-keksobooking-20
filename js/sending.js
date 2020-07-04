@@ -3,7 +3,8 @@
 (function () {
   var adFormSubmitHandler = function () {
     window.pageStates.deactivatePage();
-    window.util.filters.reset();
+    window.preview.setDefaultAvatarPreview();
+    window.preview.setDefaultImgPreview();
     window.succsess.showSuccsessMessage();
   };
 
