@@ -25,35 +25,37 @@
     };
 
     var MouseMoveHandler = function (moveEvt) {
-      var shift = {
-        x: startCoords.x - moveEvt.clientX,
-        y: startCoords.y - moveEvt.clientY
-      };
+      if (moveEvt.buttons === window.util.Key.LEFT_BUTTON) {
+        var shift = {
+          x: startCoords.x - moveEvt.clientX,
+          y: startCoords.y - moveEvt.clientY
+        };
 
-      startCoords = {
-        x: moveEvt.clientX,
-        y: moveEvt.clientY
-      };
+        startCoords = {
+          x: moveEvt.clientX,
+          y: moveEvt.clientY
+        };
 
-      var coordY = window.util.mainPin.offsetTop - shift.y;
+        var coordY = window.util.mainPin.offsetTop - shift.y;
 
-      window.util.mainPin.style.top = coordY + 'px';
+        window.util.mainPin.style.top = coordY + 'px';
 
-      var minCoordTop = CoordY.TOP - window.util.MainPin.HEIGHT;
-      var maxCoordBottom = CoordY.BOTTOM - window.util.MainPin.HEIGHT;
+        var minCoordTop = CoordY.TOP - window.util.MainPin.HEIGHT;
+        var maxCoordBottom = CoordY.BOTTOM - window.util.MainPin.HEIGHT;
 
-      limitMovingArea(coordY, 'top', minCoordTop, maxCoordBottom);
+        limitMovingArea(coordY, 'top', minCoordTop, maxCoordBottom);
 
-      var coordX = window.util.mainPin.offsetLeft - shift.x;
+        var coordX = window.util.mainPin.offsetLeft - shift.x;
 
-      window.util.mainPin.style.left = coordX + 'px';
+        window.util.mainPin.style.left = coordX + 'px';
 
-      var minCoordLeft = CoordX.LEFT - window.util.MainPin.WIDTH / 2;
-      var maxCoordRight = CoordX.RIGHT - window.util.MainPin.WIDTH / 2;
+        var minCoordLeft = CoordX.LEFT - window.util.MainPin.WIDTH / 2;
+        var maxCoordRight = CoordX.RIGHT - window.util.MainPin.WIDTH / 2;
 
-      limitMovingArea(coordX, 'left', minCoordLeft, maxCoordRight);
+        limitMovingArea(coordX, 'left', minCoordLeft, maxCoordRight);
 
-      window.form.changeAddressFieldValue();
+        window.form.changeAddressFieldValue();
+      }
     };
 
     var MouseUpHandler = function () {
