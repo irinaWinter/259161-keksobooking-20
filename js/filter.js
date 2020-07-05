@@ -1,6 +1,14 @@
 'use strict';
 
 (function () {
+  var VALUE_ANY = 'any';
+  var DEFAULT_SCORE = 0;
+  var PriceLevel = {
+    LOW: 'low',
+    MIDDLE: 'middle',
+    HIGH: 'high'
+  };
+
   var housingPrice = {
     'low': 10000,
     'middle': 50000,
@@ -20,17 +28,17 @@
     }
 
     switch (price.value) {
-      case 'low':
+      case PriceLevel.LOW:
         if (ad.offer.price < housingPrice.low) {
           rank++;
         }
         break;
-      case 'middle':
+      case PriceLevel.MIDDLE:
         if (ad.offer.price >= housingPrice.low && ad.offer.price <= housingPrice.middle) {
           rank++;
         }
         break;
-      case 'high':
+      case PriceLevel.HIGH:
         if (ad.offer.price > housingPrice.middle) {
           rank++;
         }
@@ -57,7 +65,7 @@
   var total;
 
   var checkField = function (field) {
-    if (field.value !== 'any' && field.value) {
+    if (field.value !== VALUE_ANY && field.value) {
       total++;
     }
   };
@@ -70,7 +78,7 @@
   };
 
   var changeTotal = function () {
-    total = 0;
+    total = DEFAULT_SCORE;
 
     Array.from(filter.children).forEach(checkField);
 

@@ -6,6 +6,7 @@
     HEIGHT: 40,
     ALT: 'Фотография жилья'
   };
+
   var objectTypes = {
     'palace': 'Дворец',
     'flat': 'Квартира',
@@ -99,13 +100,13 @@
   };
 
   var closeButtonKeydownHandler = function (evt) {
-    if (evt.key === 'Escape') {
+    if (evt.key === window.util.Key.ESC) {
       closeAdCard();
     }
   };
 
   var closeButtonClickHandler = function (evt) {
-    if (evt.button === 0) {
+    if (evt.button === window.util.Key.LEFT_CLICK) {
       closeAdCard();
     }
   };

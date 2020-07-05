@@ -33,7 +33,7 @@
   var message = succsessMessageTemplate.cloneNode(true);
 
   var successMessageKeydownHandler = function (evt) {
-    if (evt.key === 'Escape') {
+    if (evt.key === window.util.Key.ESC) {
       removeSuccsessMessage();
     } else {
       evt.preventDefault();
@@ -41,7 +41,7 @@
   };
 
   var successMessageClickHandler = function (evt) {
-    if (evt.button === 0) {
+    if (evt.button === window.util.Key.LEFT_CLICK) {
       removeSuccsessMessage();
     }
   };

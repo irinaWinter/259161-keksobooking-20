@@ -55,13 +55,13 @@
   };
 
   var mainPinKeydownHandler = function (evt) {
-    if (evt.key === 'Enter') {
+    if (evt.key === window.util.Key.ENTER) {
       activatePage();
     }
   };
 
   var mainPinClickHandler = function (evt) {
-    if (evt.button === 0) {
+    if (evt.button === window.util.Key.LEFT_CLICK) {
       activatePage();
     }
   };
